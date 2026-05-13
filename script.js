@@ -1,56 +1,35 @@
 /* =========================
    GERAR BARRAS
 ========================= */
-
-const barcode =
-document.getElementById("barcode");
+const barcode = document.getElementById("barcode");
 
 /* padrão mais realista */
 const pattern = [
-
   2,1,4,2,1,1,3,2,4,1,
   2,1,1,3,2,4,1,2,4,3,
   1,2,2,4,1,3,2,1,4,2,
   3,1,2,4,1,2,3,4,2,1,
   1,4,2,3,1,2,4,1,3,2,
   4,2,1,3,2,1,4,2,3,1
-
 ];
 
 pattern.forEach((size, index) => {
-
-    const bar =
-    document.createElement("div");
-
+    const bar = document.createElement("div");
     bar.classList.add("bar");
-
-    /* largura */
-    bar.style.width =
-    size + "px";
-
-    /* alturas diferentes */
-    const randomHeight =
-    60 + Math.random() * 40;
-
-    bar.style.height =
-    randomHeight + "%";
-
-    /* delay individual */
-    bar.style.animationDelay =
-    (index * 0.05) + "s";
-
+    bar.style.width = size + "px";
+    const randomHeight = 60 + Math.random() * 40;
+    bar.style.height = randomHeight + "%";
+    bar.style.animationDelay = (index * 0.05) + "s";
     barcode.appendChild(bar);
-
 });
 
 // ===============================
-// TERMINAL OSINT - MENU EXPANDIDO v2
+// TERMINAL OSINT - VERSÃO ORGANIZADA
 // ===============================
 const terminalInput = document.getElementById("terminalInput");
 const terminalOutput = document.getElementById("terminalOutput");
 
 let etapa = "comando";
-let usernameAtual = "";
 
 // EFEITO DIGITAÇÃO
 function typeTerminal(text, callback = null) {
@@ -82,35 +61,37 @@ terminalInput.addEventListener("keydown", function(e) {
             setTimeout(() => {
                 typeTerminal(`[ SYSTEM ] Carregando módulos OSINT...`, () => {
                     typeTerminal(`[ OK ] Todos os módulos carregados`, () => {
-                        typeTerminal(`
-(01) - Posts do X apagados (Wayback)
-(02) - Username Scan Multiplataforma
-(03) - Google Dork Avançado (Nome exato)
-(04) - Instagram (Threads + Tagging)
-(05) - Busca Facebook
-(06) - Processos Judiciais (BR)
-(07) - Reclame Aqui
-(08) - Pinterest
-(09) - Spotify
-(10) - Busca por Número de Telefone
-(11) - Enumeração de Emails
-(12) - Badoo + Hornet
-(13) - Telegram (t.me intext)
-(14) - Maçonaria / Freemason
-(15) - Sex Offender (EUA)
+                        
+                        typeTerminal(" ");
+                        typeTerminal("=== OSINT MENU ===");
+                        typeTerminal("(01) - Posts do X/Twitter apagados");
+                        typeTerminal("(02) - Username Scan Multiplataforma");
+                        typeTerminal("(03) - Google Dork Avançado (Nome exato)");
+                        typeTerminal("(04) - Instagram (Threads + Tagging)");
+                        typeTerminal("(05) - Busca Facebook");
+                        typeTerminal("(06) - Processos Judiciais (BR)");
+                        typeTerminal("(07) - Reclame Aqui");
+                        typeTerminal("(08) - Pinterest");
+                        typeTerminal("(09) - Spotify");
+                        typeTerminal("(10) - Busca por Número de Telefone");
+                        typeTerminal("(11) - Enumeração de Emails");
+                        typeTerminal("(12) - Badoo + Hornet");
+                        typeTerminal("(13) - Telegram (t.me intext)");
+                        typeTerminal("(14) - Maçonaria / Freemason");
+                        typeTerminal("(15) - Sex Offender (EUA)");
+                        typeTerminal(" ");
+                        typeTerminal("=== +18 / ADULT ===");
+                        typeTerminal("(16) - Garotos com Local");
+                        typeTerminal("(17) - Garotas com Local");
+                        typeTerminal("(18) - Fatalmodel Garotos");
+                        typeTerminal("(19) - Fatalmodel Garotas");
+                        typeTerminal(" ");
+                        typeTerminal("Digite o número da opção:");
 
-[ +18 / ADULT ]
-(16) - Garotos com Local
-(17) - Garotas com Local
-(18) - Fatalmodel Garotos
-(19) - Fatalmodel Garotas
-                        `, () => {
-                            typeTerminal(`Digite o número da opção:`);
-                            etapa = "menu";
-                        });
+                        etapa = "menu";
                     });
                 });
-            }, 350);
+            }, 400);
         } else {
             setTimeout(() => typeTerminal(`[ ERROR ] comando não encontrado`), 200);
         }
@@ -119,97 +100,80 @@ terminalInput.addEventListener("keydown", function(e) {
     // ====================== MENU ======================
     else if (etapa === "menu") {
         switch (valor) {
-            case "1":  // X Apagados
+            case "1":
                 typeTerminal(`[ MODULE ] Wayback Machine`);
                 setTimeout(() => { typeTerminal(`Digite o username do X:`); etapa = "userX"; }, 300);
                 break;
-
             case "2":
                 typeTerminal(`[ MODULE ] Username Multiplataforma`);
                 setTimeout(() => { typeTerminal(`Digite o username:`); etapa = "multiUsername"; }, 300);
                 break;
-
             case "3":
                 typeTerminal(`[ MODULE ] Google Dork Avançado`);
                 setTimeout(() => { typeTerminal(`Digite o nome completo:`); etapa = "dorkAvancado"; }, 300);
                 break;
-
             case "4":
                 typeTerminal(`[ MODULE ] Instagram OSINT`);
                 setTimeout(() => { typeTerminal(`Digite o username:`); etapa = "instagram"; }, 300);
                 break;
-
             case "5":
                 typeTerminal(`[ MODULE ] Facebook`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "facebook"; }, 300);
                 break;
-
             case "6":
                 typeTerminal(`[ MODULE ] Processos Judiciais`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "processos"; }, 300);
                 break;
-
             case "7":
                 typeTerminal(`[ MODULE ] Reclame Aqui`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "reclame"; }, 300);
                 break;
-
             case "8":
                 typeTerminal(`[ MODULE ] Pinterest`);
                 setTimeout(() => { typeTerminal(`Digite o username:`); etapa = "pinterest"; }, 300);
                 break;
-
             case "9":
                 typeTerminal(`[ MODULE ] Spotify`);
                 setTimeout(() => { typeTerminal(`Digite o username:`); etapa = "spotify"; }, 300);
                 break;
-
             case "10":
                 typeTerminal(`[ MODULE ] Busca por Número`);
                 setTimeout(() => { typeTerminal(`Digite o número:`); etapa = "numero"; }, 300);
                 break;
-
             case "11":
                 typeTerminal(`[ MODULE ] Enumeração de Emails`);
                 setTimeout(() => { typeTerminal(`Digite o username (sem @):`); etapa = "emailEnum"; }, 300);
                 break;
-
             case "12":
                 typeTerminal(`[ MODULE ] Badoo + Hornet`);
                 setTimeout(() => { typeTerminal(`Digite o username:`); etapa = "adultSites"; }, 300);
                 break;
-
             case "13":
                 typeTerminal(`[ MODULE ] Telegram intext`);
                 setTimeout(() => { typeTerminal(`Digite a palavra/nome:`); etapa = "tme"; }, 300);
                 break;
-
             case "14":
                 typeTerminal(`[ MODULE ] Maçonaria`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "macon"; }, 300);
                 break;
-
             case "15":
                 typeTerminal(`[ MODULE ] Sex Offender EUA`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "offender"; }, 300);
                 break;
 
-            // === +18 ===
+            // +18
             case "16":
                 typeTerminal(`[ +18 ] Garotos com Local`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "garotosLocal"; }, 300);
                 break;
-
             case "17":
                 typeTerminal(`[ +18 ] Garotas com Local`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "garotasLocal"; }, 300);
                 break;
-
             case "18":
                 typeTerminal(`[ +18 ] Fatalmodel Garotos`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "fatalGarotos"; }, 300);
                 break;
-
             case "19":
                 typeTerminal(`[ +18 ] Fatalmodel Garotas`);
                 setTimeout(() => { typeTerminal(`Digite o nome:`); etapa = "fatalGarotas"; }, 300);
@@ -220,7 +184,7 @@ terminalInput.addEventListener("keydown", function(e) {
         }
     }
 
-    // ====================== EXECUÇÃO DAS FUNÇÕES ======================
+    // ====================== EXECUÇÃO ======================
     else if (etapa === "userX") {
         const user = valor.replace("@", "");
         typeTerminal(`[ SCAN ] Buscando posts apagados de @${user}...`);
@@ -254,7 +218,7 @@ terminalInput.addEventListener("keydown", function(e) {
     else if (etapa === "macon") { document.getElementById("userMacon").value = valor; buscarMacon(); etapa = "comando"; }
     else if (etapa === "offender") { document.getElementById("userOffender").value = valor; buscarOffender(); etapa = "comando"; }
 
-    // === +18 ===
+    // +18
     else if (etapa === "garotosLocal") { 
         document.getElementById("garotosComLocal").value = valor; 
         buscarGarotosComLocal(); 
