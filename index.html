@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Terminal | Vita Osint</title>
+
+    <!-- fonte terminal -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+          rel="stylesheet">
+
+    <!-- font awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- css -->
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         FUNDO MATRIX
+    ========================== -->
+
+    <div class="matrix-bg">
+
+        <div class="cloud"></div>
+
+    </div>
+
+    <!-- =========================
+         TERMINAL
+    ========================== -->
+
+    <section class="terminal-page">
+
+        <!-- TOPO -->
+        <div class="terminal-header">
+
+            <div class="terminal-buttons">
+
+                <span class="btn red"></span>
+                <span class="btn yellow"></span>
+                <span class="btn green"></span>
+
+            </div>
+
+            <div class="terminal-title">
+
+                SYSTEM://VITA-OSINT
+
+            </div>
+
+        </div>
+
+        <!-- CORPO -->
+        <div class="terminal-body">
+
+            <div class="terminal-line">
+
+                <span class="prompt">
+                    root@vita:~$
+                </span>
+
+                <span class="command">
+                    iniciar rastreamento
+                </span>
+
+            </div>
+
+            <div class="terminal-log success">
+
+                [+] conexão estabelecida...
+
+            </div>
+
+            <div class="terminal-log warning">
+
+                [!] verificando vazamentos públicos...
+
+            </div>
+
+            <div class="terminal-log danger">
+
+                [-] possível exposição detectada
+
+            </div>
+
+            <!-- INPUT -->
+            <div class="terminal-input">
+
+                <span class="prompt">
+                    root@vita:~$
+                </span>
+
+                <input type="text"
+                       placeholder="Digite um comando...">
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         JS
+    ========================== -->
+
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
