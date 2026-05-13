@@ -1,54 +1,47 @@
 /* =========================
-   GERADOR CÓDIGO DE BARRAS
+   GERAR BARRAS
 ========================= */
 
-const scanner =
-document.getElementById("scannerBar");
+const barcode =
+document.getElementById("barcode");
 
-function criarBarcode(){
+/* padrão mais realista */
+const pattern = [
 
-  scanner.innerHTML = "";
+  2,1,4,2,1,1,3,2,4,1,
+  2,1,1,3,2,4,1,2,4,3,
+  1,2,2,4,1,3,2,1,4,2,
+  3,1,2,4,1,2,3,4,2,1,
+  1,4,2,3,1,2,4,1,3,2,
+  4,2,1,3,2,1,4,2,3,1
 
-  const total =
-  Math.floor(window.innerWidth / 6);
+];
 
-  for(let i = 0; i < total; i++){
+pattern.forEach((size, index) => {
 
-    const line =
+    const bar =
     document.createElement("div");
 
-    line.classList.add("barcode-line");
+    bar.classList.add("bar");
 
-    /* largura aleatória */
-    const width =
-    Math.random() > 0.7 ? 3 : 1;
+    /* largura */
+    bar.style.width =
+    size + "px";
 
-    /* altura aleatória */
-    const height =
-    40 + Math.random() * 60;
+    /* alturas diferentes */
+    const randomHeight =
+    60 + Math.random() * 40;
 
-    line.style.width =
-    width + "px";
+    bar.style.height =
+    randomHeight + "%";
 
-    line.style.height =
-    height + "%";
+    /* delay individual */
+    bar.style.animationDelay =
+    (index * 0.05) + "s";
 
-    line.style.left =
-    (i * 6) + "px";
+    barcode.appendChild(bar);
 
-    line.style.opacity =
-    0.4 + Math.random();
-
-    scanner.appendChild(line);
-  }
-}
-
-criarBarcode();
-
-window.addEventListener(
-  "resize",
-  criarBarcode
-);
+});
 
 const input = document.getElementById("terminalInput");
 const output = document.getElementById("output");
