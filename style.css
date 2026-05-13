@@ -1,4 +1,3 @@
-/* RESET */
 *{
   margin:0;
   padding:0;
@@ -6,104 +5,53 @@
 }
 
 body{
-  background:#020b0a;
-  overflow:hidden;
+  background:#000;
+  color:#00ff88;
   font-family:'Share Tech Mono', monospace;
+
   width:100%;
   height:100vh;
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+
+  overflow:hidden;
+
+  padding:20px;
 }
 
-/* MATRIX */
-#matrix{
-  position:fixed;
-  inset:0;
+.terminal{
   width:100%;
   height:100%;
-  z-index:0;
 }
 
-/* GLOBO ASCII */
-#asciiGlobe{
-  position:relative;
-  z-index:2;
-
-  color:#00ff99;
-
-  font-size:11px;
-  line-height:11px;
-
-  text-align:center;
-
-  text-shadow:
-  0 0 5px #00ff99,
-  0 0 15px #00ff99;
-
-  animation:
-  pulse 3s infinite ease-in-out,
-  float 5s infinite ease-in-out;
+#line{
+  margin-bottom:10px;
 }
 
-/* TEXTO */
-.tracking-text{
-  position:relative;
-  z-index:2;
-
-  margin-top:25px;
-
-  color:#00ffcc;
-
-  font-size:1.2rem;
-  letter-spacing:3px;
-
-  text-shadow:
-  0 0 5px #00ffcc,
-  0 0 12px #00ffcc;
+.line{
+  margin-bottom:8px;
+  word-wrap:break-word;
 }
 
-/* CURSOR */
-.cursor{
-  animation:blink 0.7s infinite;
+.green{
+  color:#00ff88;
 }
 
-/* ANIMAÇÕES */
-@keyframes blink{
-  50%{
-    opacity:0;
-  }
+.input-line{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  margin-top:10px;
 }
 
-@keyframes pulse{
-  0%{
-    transform:scale(1);
-    opacity:0.8;
-  }
+#terminalInput{
+  background:transparent;
+  border:none;
+  outline:none;
 
-  50%{
-    transform:scale(1.04);
-    opacity:1;
-  }
+  color:#00ff88;
 
-  100%{
-    transform:scale(1);
-    opacity:0.8;
-  }
-}
+  font-family:'Share Tech Mono', monospace;
+  font-size:1rem;
 
-@keyframes float{
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-10px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
+  width:100%;
 }
