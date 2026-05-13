@@ -43,122 +43,145 @@ pattern.forEach((size, index) => {
 
 });
 
-const input = document.getElementById("terminalInput");
-const output = document.getElementById("output");
+// ===============================
+// TERMINAL OSINT
+// ===============================
 
-let etapa = "";
+const terminalInput = document.getElementById("terminalInput");
+const terminalOutput = document.getElementById("terminalOutput");
 
-/* =========================
-   ADICIONA LINHA
-========================= */
+let etapa = "comando";
+let comandoAtual = "";
 
-function addLine(text){
+// ===============================
+// EFEITO DIGITAÇÃO TERMINAL
+// ===============================
+function typeTerminal(text, callback = null) {
 
-  const div = document.createElement("div");
+    let linha = document.createElement("div");
+    linha.classList.add("terminal-line");
 
-  div.className = "line";
+    terminalOutput.appendChild(linha);
 
-  div.innerHTML = text;
+    let i = 0;
 
-  output.appendChild(div);
+    let typing = setInterval(() => {
 
-  output.scrollTop = output.scrollHeight;
+        linha.innerHTML += text.charAt(i);
+
+        i++;
+
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+        if (i >= text.length) {
+
+            clearInterval(typing);
+
+            if (callback) callback();
+        }
+
+    }, 12); // velocidade da digitação
 }
 
-/* =========================
-   FOCO AUTOMÁTICO
-========================= */
+// ===============================
+// ENTER TERMINAL
+// ===============================
+terminalInput.addEventListener("keydown", function(e) {
 
-document.addEventListener("click", () => {
-  input.focus();
+    if (e.key !== "Enter") return;
+
+    const valor = terminalInput.value.trim();
+
+    if (!valor) return;
+
+    typeTerminal(`<span class="prompt">vitordev01@root:~$</span> ${valor}`);
+
+    // ===============================
+    // ETAPA COMANDO
+    // ===============================
+    if (etapa === "comando") {
+
+        if (valor.toLowerCase() === "osint") {
+
+            comandoAtual = "osint";
+
+            setTimeout(() => {
+
+                typeTerminal(`[ SYSTEM ] Carregando módulos OSINT...`, () => {
+
+                    typeTerminal(`[ OK ] Banco Wayback conectado`, () => {
+
+                        typeTerminal(`
+(01) - Posts do X apagados
+(02) - Username Scan
+(03) - Google Dork
+                        `, () => {
+
+                            typeTerminal(`Digite o número da opção:`);
+
+                            etapa = "menu";
+                        });
+
+                    });
+
+                });
+
+            }, 300);
+
+        } else {
+
+            setTimeout(() => {
+                typeTerminal(`[ ERROR ] comando não encontrado`);
+            }, 200);
+        }
+    }
+
+    // ===============================
+    // MENU
+    // ===============================
+    else if (etapa === "menu") {
+
+        if (valor === "1") {
+
+            setTimeout(() => {
+
+                typeTerminal(`[ MODULE ] Wayback Machine iniciado...`, () => {
+
+                    typeTerminal(`Digite o username do X/Twitter:`);
+
+                    etapa = "userX";
+                });
+
+            }, 200);
+
+        } else {
+
+            typeTerminal(`[ ERROR ] opção inválida`);
+        }
+    }
+
+    // ===============================
+    // USER X
+    // ===============================
+    else if (etapa === "userX") {
+
+        const user = valor.replace("@", "");
+
+        typeTerminal(`[ SCAN ] procurando posts apagados de @${user}...`);
+
+        setTimeout(() => {
+
+            window.open(
+                `https://web.archive.org/web/*/https://twitter.com/${user}/status/*`,
+                "_blank"
+            );
+
+            typeTerminal(`[ OK ] Redirecionando Wayback Machine...`);
+
+        }, 1200);
+
+        etapa = "comando";
+    }
+
+    terminalInput.value = "";
 });
-
-window.onload = () => {
-  input.focus();
-};
-
-/* =========================
-   ENTER
-========================= */
-
-input.addEventListener("keydown", function(e){
-
-  if(e.key === "Enter"){
-
-    e.preventDefault();
-
-    const valor = input.value.trim();
-
-    if(valor === "") return;
-
-    /* escreve comando digitado */
-    addLine(`
-      <span class="green">vitordev01@root</span>:~$ ${valor}
-    `);
-
-    /* =========================
-       COMANDO OSINT
-    ========================= */
-
-    if(valor.toLowerCase() === "osint"){
-
-      addLine(`
-        [01] - Posts do X apagados
-      `);
-
-      addLine(`
-        Digite o número da opção...
-      `);
-
-      etapa = "menu";
-    }
-
-    /* =========================
-       MENU
-    ========================= */
-
-    else if(etapa === "menu" && valor === "1"){
-
-      addLine(`
-        Digite o username:
-      `);
-
-      etapa = "user_archive";
-    }
-
-    /* =========================
-       USERNAME
-    ========================= */
-
-    else if(etapa === "user_archive"){
-
-      const user = valor.replace("@","");
-
-      const url =
-      `https://web.archive.org/web/*/https://twitter.com/${user}/status/*`;
-
-      addLine(`
-        Abrindo rastreamento de:
-        ${user}
-      `);
-
-      window.open(url, "_blank");
-
-      etapa = "";
-    }
-
-    /* =========================
-       INVÁLIDO
-    ========================= */
-
-    else{
-
-      addLine(`
-        comando não reconhecido...
-      `);
-    }
-
-    input.value = "";
-  }
-});
-
