@@ -56,63 +56,112 @@ body{
   width:100%;
 }
 
-/* =========================
-   BARRA SCANNER REALISTA
+ /* =========================
+   CÓDIGO DE BARRAS
 ========================= */
 
-#scannerBar{
-  position:fixed;
-  top:0;
-  left:0;
+.barcode-box{
 
-  width:100%;
-  height:34px;
+    position:relative;
 
-  overflow:hidden;
+    width:90%;
+    max-width:900px;
 
-  background:#000;
+    margin:30px auto 50px auto;
 
-  border-bottom:1px solid #00ff88;
+    padding:20px 20px 10px;
 
-  z-index:9999;
+    border-radius:18px;
+
+    background:#050505;
+
+    border:1px solid #00ff88;
+
+    box-shadow:
+    0 0 10px #00ff44,
+    inset 0 0 15px rgba(0,255,100,0.08);
+
+    overflow:hidden;
 }
 
-/* FAIXA BRILHO */
-#scannerBar::after{
-  content:"";
+/* BARRAS */
+#barcode{
 
-  position:absolute;
+    width:100%;
+    height:170px;
 
-  top:0;
-  left:-30%;
+    display:flex;
 
-  width:30%;
-  height:100%;
+    align-items:flex-end;
 
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(0,255,136,0.35),
-    transparent
-  );
+    justify-content:center;
 
-  animation:scannerMove 2s linear infinite;
+    gap:3px;
 }
 
-/* LINHAS DO CÓDIGO */
-.barcode-line{
-  position:absolute;
-  top:0;
+/* LINHAS */
+.bar{
 
-  height:100%;
+    background:#00ff88;
 
-  background:#00ff88;
+    box-shadow:
+    0 0 4px #00ff88,
+    0 0 8px #00ff88;
 
-  opacity:0.85;
+    border-radius:1px;
 
-  box-shadow:0 0 5px #00ff88;
+    animation:pulseBar 2s infinite ease-in-out;
 }
 
+/* TEXTO */
+.barcode-text{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    color:#00ff88;
+
+    font-size:4rem;
+
+    letter-spacing:6px;
+
+    text-shadow:
+    0 0 5px #00ff88,
+    0 0 10px #00ff88;
+}
+
+/* ANIMAÇÃO */
+@keyframes pulseBar{
+
+    0%{
+        opacity:0.7;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0.7;
+    }
+}
+
+/* MOBILE */
+@media(max-width:700px){
+
+    #barcode{
+        height:110px;
+        gap:2px;
+    }
+
+    .barcode-text{
+
+        font-size:2rem;
+
+        letter-spacing:3px;
+    }
+}
 @keyframes scannerMove{
 
   100%{
