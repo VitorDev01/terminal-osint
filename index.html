@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rastreamento</title>
+
+  <title>vitor@root</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +17,29 @@
 
 <body>
 
-  <!-- FUNDO MATRIX -->
-  <canvas id="matrix"></canvas>
+  <div class="terminal">
 
-  <!-- GLOBO ASCII -->
-  <pre id="asciiGlobe"></pre>
+    <div id="output">
 
-  <!-- TEXTO -->
-  <div class="tracking-text">
-    <span id="typed"></span><span class="cursor">█</span>
+      <div class="line">
+        <span class="green">vitordev01@root</span>:~$
+        digite o comando...
+      </div>
+
+    </div>
+
+    <div class="input-line">
+
+      <span class="green">vitordev01@root</span>:~$
+
+      <input
+        type="text"
+        id="terminalInput"
+        autocomplete="off"
+        autofocus>
+
+    </div>
+
   </div>
 
   <script src="script.js"></script>
