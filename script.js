@@ -1,149 +1,94 @@
-/* =========================
-   MATRIX
-========================= */
+const input = document.getElementById("terminalInput");
+const output = document.getElementById("output");
 
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+let etapa = "";
+let comandoAtual = "";
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function addLine(text){
 
-const letters =
-"アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const div = document.createElement("div");
 
-const fontSize = 14;
+  div.classList.add("line");
 
-const columns = canvas.width / fontSize;
+  div.innerHTML = text;
 
-const drops = [];
+  output.appendChild(div);
 
-for(let i = 0; i < columns; i++){
-  drops[i] = 1;
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
-function drawMatrix(){
+input.addEventListener("keydown", function(e){
 
-  ctx.fillStyle = "rgba(2,11,10,0.08)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  if(e.key !== "Enter") return;
 
-  ctx.fillStyle = "#00ff88";
-  ctx.font = fontSize + "px Share Tech Mono";
+  const valor = input.value.trim();
 
-  for(let i = 0; i < drops.length; i++){
+  addLine(`
+    <span class="green">vitordev01@root</span>:~$
+    ${valor}
+  `);
 
-    const text =
-    letters[Math.floor(Math.random() * letters.length)];
+  /* =========================
+     COMANDO PRINCIPAL
+  ========================= */
 
-    ctx.fillText(
-      text,
-      i * fontSize,
-      drops[i] * fontSize
-    );
+  if(valor.toLowerCase() === "osint"){
 
-    if(
-      drops[i] * fontSize > canvas.height &&
-      Math.random() > 0.975
-    ){
-      drops[i] = 0;
-    }
+    addLine(`
+      [01] - Posts do X apagados
+    `);
 
-    drops[i]++;
-  }
-}
+    addLine(`
+      Digite o número da opção...
+    `);
 
-setInterval(drawMatrix, 33);
-
-/* =========================
-   GLOBO ASCII ANIMADO
-========================= */
-
-const globe = document.getElementById("asciiGlobe");
-
-const globeFrames = [
-
-`
-            .-""""-.
-         .-'  .--.  '-.
-       .'   .'    '.   '.
-      /   .'  .--.  '.   \\
-     ;   /   (____)   \\   ;
-     |  |  .--------.  |  |
-     ;  |  |  .--.  |  |  ;
-      \\  \\ | (____) | /  /
-       '. '.'.____.'.' .'
-         '-.______.-'
-`,
-
-`
-            .-""""-.
-         .-'  .--.  '-.
-       .'  .-'    '-.  '.
-      /  .'  .--.    '.  \\
-     ;  /   (____)     \\  ;
-     | |  .---------.   | |
-     ; |  |  .--.   |   | ;
-      \\ \\ | (____)  |  / /
-       '.'.'._____.'.'.'
-         '-.______.-'
-`,
-
-`
-            .-""""-.
-         .-'  .--.  '-.
-       .'   .'    '.   '.
-      /   /  .--.  \\    \\
-     ;   |  (____) |    ;
-     |   | .------.|    |
-     ;   | | .--. ||    ;
-      \\   \\|(____)||   /
-       '.  '.____.'  .'
-         '-.______.-'
-`
-];
-
-let frame = 0;
-
-setInterval(() => {
-
-  globe.textContent = globeFrames[frame];
-
-  frame++;
-
-  if(frame >= globeFrames.length){
-    frame = 0;
+    etapa = "menu";
   }
 
-}, 400);
+  /* =========================
+     ESCOLHE OPÇÃO
+  ========================= */
 
-/* =========================
-   TEXTO DIGITANDO
-========================= */
+  else if(etapa === "menu" && valor === "1"){
 
-const typed = document.getElementById("typed");
+    addLine(`
+      Digite o username do X/Twitter:
+    `);
 
-const phrase =
-"INICIANDO RASTREAMENTO";
-
-let index = 0;
-
-function typeText(){
-
-  if(index < phrase.length){
-
-    typed.innerHTML += phrase.charAt(index);
-
-    index++;
-
-    setTimeout(typeText, 90);
+    etapa = "user_archive";
   }
-}
 
-typeText();
+  /* =========================
+     USERNAME
+  ========================= */
 
-/* RESPONSIVO */
-window.addEventListener("resize", () => {
+  else if(etapa === "user_archive"){
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+    const user = valor.replace("@","");
 
+    const url =
+    `https://web.archive.org/web/*/https://twitter.com/${user}/status/*`;
+
+    window.open(url, "_blank");
+
+    addLine(`
+      Abrindo Wayback Machine para:
+      ${user}
+    `);
+
+    etapa = "";
+  }
+
+  /* =========================
+     COMANDO INVÁLIDO
+  ========================= */
+
+  else{
+
+    addLine(`
+      comando não reconhecido...
+    `);
+  }
+
+  input.value = "";
 });
