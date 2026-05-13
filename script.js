@@ -1,3 +1,55 @@
+/* =========================
+   GERADOR CÓDIGO DE BARRAS
+========================= */
+
+const scanner =
+document.getElementById("scannerBar");
+
+function criarBarcode(){
+
+  scanner.innerHTML = "";
+
+  const total =
+  Math.floor(window.innerWidth / 6);
+
+  for(let i = 0; i < total; i++){
+
+    const line =
+    document.createElement("div");
+
+    line.classList.add("barcode-line");
+
+    /* largura aleatória */
+    const width =
+    Math.random() > 0.7 ? 3 : 1;
+
+    /* altura aleatória */
+    const height =
+    40 + Math.random() * 60;
+
+    line.style.width =
+    width + "px";
+
+    line.style.height =
+    height + "%";
+
+    line.style.left =
+    (i * 6) + "px";
+
+    line.style.opacity =
+    0.4 + Math.random();
+
+    scanner.appendChild(line);
+  }
+}
+
+criarBarcode();
+
+window.addEventListener(
+  "resize",
+  criarBarcode
+);
+
 const input = document.getElementById("terminalInput");
 const output = document.getElementById("output");
 
@@ -116,3 +168,4 @@ input.addEventListener("keydown", function(e){
     input.value = "";
   }
 });
+
