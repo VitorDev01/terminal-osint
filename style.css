@@ -1,332 +1,109 @@
-/* =========================
-   RESET
-========================= */
-
+/* RESET */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-
-/* =========================
-   BODY
-========================= */
 
 body{
-
-    background:#020202;
-
-    color:#00ff88;
-
-    font-family:'Share Tech Mono', monospace;
-
-    min-height:100vh;
-
-    overflow-x:hidden;
-
-    position:relative;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:30px;
+  background:#020b0a;
+  overflow:hidden;
+  font-family:'Share Tech Mono', monospace;
+  width:100%;
+  height:100vh;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 }
 
-/* =========================
-   MATRIX BG
-========================= */
-
-.matrix-bg{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    overflow:hidden;
-
-    z-index:-1;
-
-    pointer-events:none;
+/* MATRIX */
+#matrix{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
 }
 
-.cloud{
+/* GLOBO ASCII */
+#asciiGlobe{
+  position:relative;
+  z-index:2;
 
-    position:relative;
+  color:#00ff99;
 
-    width:100%;
-    height:100%;
+  font-size:11px;
+  line-height:11px;
+
+  text-align:center;
+
+  text-shadow:
+  0 0 5px #00ff99,
+  0 0 15px #00ff99;
+
+  animation:
+  pulse 3s infinite ease-in-out,
+  float 5s infinite ease-in-out;
 }
 
-.text{
+/* TEXTO */
+.tracking-text{
+  position:relative;
+  z-index:2;
 
-    position:absolute;
+  margin-top:25px;
 
-    top:-50px;
+  color:#00ffcc;
 
-    color:#00ff88;
+  font-size:1.2rem;
+  letter-spacing:3px;
 
-    animation:rain linear forwards;
+  text-shadow:
+  0 0 5px #00ffcc,
+  0 0 12px #00ffcc;
+}
 
+/* CURSOR */
+.cursor{
+  animation:blink 0.7s infinite;
+}
+
+/* ANIMAÇÕES */
+@keyframes blink{
+  50%{
+    opacity:0;
+  }
+}
+
+@keyframes pulse{
+  0%{
+    transform:scale(1);
     opacity:0.8;
+  }
 
-    text-shadow:
-    0 0 5px #00ff88,
-    0 0 10px #00ff88;
+  50%{
+    transform:scale(1.04);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:0.8;
+  }
 }
 
-/* =========================
-   ANIMAÇÃO MATRIX
-========================= */
-
-@keyframes rain{
-
-    0%{
-        transform:translateY(-100px);
-        opacity:0;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(120vh);
-        opacity:0;
-    }
-
-}
-
-/* =========================
-   TERMINAL PAGE
-========================= */
-
-.terminal-page{
-
-    width:95%;
-    max-width:950px;
-
-    background:#050505;
-
-    border:1px solid #00ff88;
-
-    border-radius:14px;
-
-    overflow:hidden;
-
-    backdrop-filter:blur(3px);
-
-    box-shadow:
-    0 0 10px #00ff88,
-    0 0 40px rgba(0,255,136,0.15);
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.terminal-header{
-
-    width:100%;
-
-    padding:14px 20px;
-
-    background:#0b0b0b;
-
-    border-bottom:1px solid #00ff88;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-}
-
-.terminal-buttons{
-
-    display:flex;
-
-    gap:8px;
-}
-
-.btn{
-
-    width:13px;
-    height:13px;
-
-    border-radius:50%;
-}
-
-.red{
-    background:#ff4d4d;
-}
-
-.yellow{
-    background:#ffcc00;
-}
-
-.green{
-    background:#00ff88;
-}
-
-.terminal-title{
-
-    color:#00ff88;
-
-    font-size:14px;
-
-    letter-spacing:2px;
-
-    text-shadow:0 0 8px #00ff88;
-}
-
-/* =========================
-   BODY TERMINAL
-========================= */
-
-.terminal-body{
-
-    padding:25px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-}
-
-/* =========================
-   LINHAS
-========================= */
-
-.terminal-line{
-
-    display:flex;
-
-    gap:10px;
-
-    flex-wrap:wrap;
-}
-
-.prompt{
-
-    color:#00ff88;
-
-    text-shadow:0 0 5px #00ff88;
-}
-
-.command{
-
-    color:#d4d4d4;
-}
-
-/* =========================
-   LOGS
-========================= */
-
-.terminal-log{
-
-    width:100%;
-
-    padding:14px;
-
-    background:#0a0a0a;
-
-    border-left:3px solid #00ff88;
-
-    line-height:1.6;
-}
-
-.success{
-
-    color:#00ff88;
-}
-
-.warning{
-
-    color:#ffaa00;
-
-    border-left-color:#ffaa00;
-}
-
-.danger{
-
-    color:#ff3b3b;
-
-    border-left-color:#ff3b3b;
-}
-
-/* =========================
-   INPUT
-========================= */
-
-.terminal-input{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-top:10px;
-}
-
-.terminal-input input{
-
-    flex:1;
-
-    background:transparent;
-
-    border:none;
-
-    outline:none;
-
-    color:#00ff88;
-
-    font-family:'Share Tech Mono', monospace;
-
-    font-size:15px;
-}
-
-.terminal-input input::placeholder{
-
-    color:#008f5a;
-}
-
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media(max-width:700px){
-
-    body{
-        padding:15px;
-    }
-
-    .terminal-header{
-
-        flex-direction:column;
-
-        gap:12px;
-    }
-
-    .terminal-title{
-
-        text-align:center;
-
-        font-size:12px;
-    }
-
-    .terminal-body{
-
-        padding:18px;
-    }
-
+@keyframes float{
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
 }
